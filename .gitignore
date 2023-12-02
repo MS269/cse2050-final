@@ -1,0 +1,8 @@
+# python
+__pycache__
+
+# intelij
+.idea
+
+# misc
+.DS_Store
