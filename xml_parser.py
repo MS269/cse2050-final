@@ -9,7 +9,7 @@ from choice_image_question import ChoiceImageQuestion
 
 class XMLParser:
     def __init__(self):
-        self.questions: [ChoiceQuestion | ChoiceImageQuestion] = []
+        self.questions = []
 
     # Takes in a file_name and returns a list of question objects
     # Also formats all variables inside the question object

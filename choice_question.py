@@ -1,7 +1,5 @@
 # By Dongwook Kim
 
-from PyQt5.QtWidgets import QLayout
-
 from question import Question
 
 
@@ -17,15 +15,15 @@ class ChoiceQuestion(Question):
     def set_answer_comments(self, comments: str):
         self._answer_comments = comments
 
-    def display(self, layout: QLayout):
-        super().display(layout)
+    def display(self, ui):
+        super().display(ui)
 
-        layout.radio_button_1.setText(self._choices[0][0])
-        layout.radio_button_2.setText(self._choices[1][0])
-        layout.radio_button_3.setText(self._choices[2][0])
-        layout.radio_button_4.setText(self._choices[3][0])
+        ui.radio_button_1.setText(self._choices[0][0])
+        ui.radio_button_2.setText(self._choices[1][0])
+        ui.radio_button_3.setText(self._choices[2][0])
+        ui.radio_button_4.setText(self._choices[3][0])
 
-        layout.label_detail.setText(self._answer_comments)
+        ui.label_detail.setText(self._answer_comments)
 
 
 

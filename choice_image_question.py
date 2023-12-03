@@ -1,6 +1,5 @@
 # By Dongwook Kim
 
-from PyQt5.QtWidgets import QLayout
 from PyQt5.QtGui import QPixmap
 
 from choice_question import ChoiceQuestion
@@ -16,9 +15,9 @@ class ChoiceImageQuestion(ChoiceQuestion):
         with open(image, 'rb') as img_file:
             self._image = img_file.read()
 
-    def display(self, layout: QLayout):
-        super().display(layout)
+    def display(self, ui):
+        super().display(ui)
 
         pixmap = QPixmap()
         pixmap.loadFromData(self._image)
-        layout.label_image.setPixmap(pixmap)
+        ui.label_image.setPixmap(pixmap)

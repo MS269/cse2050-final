@@ -1,7 +1,5 @@
 # By Dongwook Kim
 
-from PyQt5.QtWidgets import QLayout
-
 
 class Question:
     def __init__(self):
@@ -18,5 +16,5 @@ class Question:
         # TODO
         return self._answer == answer_text
 
-    def display(self, layout: QLayout):
-        layout.label_text.setText(self._question_text)
+    def display(self, ui):
+        ui.label_text.setText(self._question_text)
