@@ -77,6 +77,7 @@ class DVMDriverTestUI:
         size_policy.setHeightForWidth(self.radio_button_1.sizePolicy().hasHeightForWidth())
         self.radio_button_1.setSizePolicy(size_policy)
         self.radio_button_1.setObjectName("radio_button_1")
+        self.radio_button_1.clicked.connect(self.radio_buttons_clicked)
         self.form_layout_answers.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.radio_button_1)
 
         self.radio_button_2.setEnabled(True)
@@ -85,8 +86,8 @@ class DVMDriverTestUI:
         size_policy.setVerticalStretch(0)
         size_policy.setHeightForWidth(self.radio_button_2.sizePolicy().hasHeightForWidth())
         self.radio_button_2.setSizePolicy(size_policy)
-        self.radio_button_2.setChecked(True)
         self.radio_button_2.setObjectName("radio_button_2")
+        self.radio_button_2.clicked.connect(self.radio_buttons_clicked)
         self.form_layout_answers.setWidget(1, QtWidgets.QFormLayout.LabelRole, self.radio_button_2)
 
         self.radio_button_3.setEnabled(True)
@@ -96,6 +97,7 @@ class DVMDriverTestUI:
         size_policy.setHeightForWidth(self.radio_button_3.sizePolicy().hasHeightForWidth())
         self.radio_button_3.setSizePolicy(size_policy)
         self.radio_button_3.setObjectName("radio_button_3")
+        self.radio_button_3.clicked.connect(self.radio_buttons_clicked)
         self.form_layout_answers.setWidget(2, QtWidgets.QFormLayout.LabelRole, self.radio_button_3)
 
         self.radio_button_4.setEnabled(True)
@@ -105,6 +107,7 @@ class DVMDriverTestUI:
         size_policy.setHeightForWidth(self.radio_button_4.sizePolicy().hasHeightForWidth())
         self.radio_button_4.setSizePolicy(size_policy)
         self.radio_button_4.setObjectName("radio_button_4")
+        self.radio_button_4.clicked.connect(self.radio_buttons_clicked)
         self.form_layout_answers.setWidget(3, QtWidgets.QFormLayout.LabelRole, self.radio_button_4)
 
         self.grid_layout_main.addLayout(self.form_layout_answers, 2, 0, 1, 1)
@@ -154,8 +157,6 @@ class DVMDriverTestUI:
         sys.exit(self._application.exec_())
 
     def update_ui(self):
-        self.label_info.setText(f"Question {self._current_question + 1} of {len(self._questions)} | Correct: {self._correct_question}/{len(self._questions)}")
-
         if type(self._questions[self._current_question]) is ChoiceQuestion:
             self.label_image.setVisible(False)
             self._questions[self._current_question].display(self)
@@ -163,8 +164,51 @@ class DVMDriverTestUI:
             self.label_image.setVisible(True)
             self._questions[self._current_question].display(self)
 
+        self.radio_button_1.setEnabled(True)
+        self.radio_button_1.setCheckable(False)
+        self.radio_button_1.setCheckable(True)
+
+        self.radio_button_2.setEnabled(True)
+        self.radio_button_2.setCheckable(False)
+        self.radio_button_2.setCheckable(True)
+
+        self.radio_button_3.setEnabled(True)
+        self.radio_button_3.setCheckable(False)
+        self.radio_button_3.setCheckable(True)
+
+        self.radio_button_4.setEnabled(True)
+        self.radio_button_4.setCheckable(False)
+        self.radio_button_4.setCheckable(True)
+
+        self.label_detail.setHidden(True)
+
+        self.label_info.setText(f"Question {self._current_question + 1} of {len(self._questions)} | Correct: {self._correct_question}/{len(self._questions)}")
+
         if self._current_question == len(self._questions) - 1:
             self.push_button_next.setDisabled(True)
+
+    def radio_buttons_clicked(self):
+        self.radio_button_1.setDisabled(True)
+        self.radio_button_2.setDisabled(True)
+        self.radio_button_3.setDisabled(True)
+        self.radio_button_4.setDisabled(True)
+
+        self.label_detail.setVisible(True)
+
+        if (self.radio_button_1.isChecked()
+                and self._questions[self._current_question].check_answer(self.radio_button_1.text())):
+            self._correct_question += 1
+        elif (self.radio_button_2.isChecked()
+              and self._questions[self._current_question].check_answer(self.radio_button_2.text())):
+            self._correct_question += 1
+        elif (self.radio_button_3.isChecked()
+              and self._questions[self._current_question].check_answer(self.radio_button_3.text())):
+            self._correct_question += 1
+        elif (self.radio_button_4.isChecked()
+              and self._questions[self._current_question].check_answer(self.radio_button_4.text())):
+            self._correct_question += 1
+
+        self.label_info.setText(f"Question {self._current_question + 1} of {len(self._questions)} | Correct: {self._correct_question}/{len(self._questions)}")
 
     def push_next_button_clicked(self):
         # from adrian

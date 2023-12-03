@@ -13,7 +13,6 @@ class Question:
         self._answer = answer_text
 
     def check_answer(self, answer_text: str):
-        # TODO
         return self._answer == answer_text
 
     def display(self, ui):
