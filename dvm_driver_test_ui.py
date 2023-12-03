@@ -211,10 +211,10 @@ class DVMDriverTestUI:
         self.label_info.setText(f"Question {self._current_question + 1} of {len(self._questions)} | Correct: {self._correct_question}/{len(self._questions)}")
 
     def push_next_button_clicked(self):
-        # from adrian
+        # From Adrian
         self._current_question += 1
         self.update_ui()
 
     def push_quit_button_clicked(self):
-        # from adrian
+        # From Adrian
         self._application.quit()
