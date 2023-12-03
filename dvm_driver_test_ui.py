@@ -10,7 +10,6 @@ from choice_image_question import ChoiceImageQuestion
 class DVMDriverTestUI:
     def __init__(self, questions: list):
         self._questions = questions
-        self._total_question = len(questions)
         self._current_question = 0
         self._correct_question = 0
 
@@ -133,9 +132,11 @@ class DVMDriverTestUI:
         self.grid_layout_footer.addWidget(self.label_info, 0, 0, 1, 1)
 
         self.push_button_next.setObjectName("push_button_next")
+        self.push_button_next.clicked.connect(self.push_next_button_clicked)
         self.grid_layout_footer.addWidget(self.push_button_next, 0, 2, 1, 1)
 
         self.push_button_quit.setObjectName("push_button_quit")
+        self.push_button_quit.clicked.connect(self.push_quit_button_clicked)
         self.grid_layout_footer.addWidget(self.push_button_quit, 0, 3, 1, 1)
 
         self.grid_layout_main.addLayout(self.grid_layout_footer, 4, 0, 1, 1)
@@ -153,7 +154,7 @@ class DVMDriverTestUI:
         sys.exit(self._application.exec_())
 
     def update_ui(self):
-        self.label_info.setText(f"Question {self._current_question + 1} of {self._total_question} | Correct: {self._correct_question}/{self._total_question}")
+        self.label_info.setText(f"Question {self._current_question + 1} of {len(self._questions)} | Correct: {self._correct_question}/{len(self._questions)}")
 
         if type(self._questions[self._current_question]) is ChoiceQuestion:
             self.label_image.setVisible(False)
@@ -161,3 +162,15 @@ class DVMDriverTestUI:
         elif type(self._questions[self._current_question]) is ChoiceImageQuestion:
             self.label_image.setVisible(True)
             self._questions[self._current_question].display(self)
+
+        if self._current_question == len(self._questions) - 1:
+            self.push_button_next.setDisabled(True)
+
+    def push_next_button_clicked(self):
+        # from adrian
+        self._current_question += 1
+        self.update_ui()
+
+    def push_quit_button_clicked(self):
+        # from adrian
+        self._application.quit()
