@@ -19,5 +19,4 @@ class Question:
         return self._answer == answer_text
 
     def display(self, layout: QLayout):
-        # TODO
-        pass
+        layout.label_text.setText(self._question_text)

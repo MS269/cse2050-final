@@ -17,16 +17,28 @@ class DVMDriverTestUI:
         self._choice_image_question_ui = ChoiceImageQuestionUI(self._main_window)
 
         self._questions = questions
+        self._total_question = len(questions)
         self._current_question = 0
+        self._correct_question = 0
 
     def display(self):
-        # TODO
-        if isinstance(self._questions[self._current_question], ChoiceQuestion):
-            self._choice_question_ui.setup_ui()
-            self._choice_question_ui.retranslate_ui()
-        elif isinstance(self._questions[self._current_question], ChoiceImageQuestion):
-            self._choice_image_question_ui.setup_ui()
-            self._choice_image_question_ui.retranslate_ui()
+        self._choice_question_ui.setup_ui()
+        self._choice_question_ui.retranslate_ui()
+
+        self._choice_image_question_ui.setup_ui()
+        self._choice_image_question_ui.retranslate_ui()
+
+        self.update_ui()
 
         self._main_window.show()
         sys.exit(self._application.exec_())
+
+    def update_ui(self):
+        new_label_info = f"Question {self._current_question + 1} of {self._total_question} | Correct: {self._correct_question}/{self._total_question}"
+
+        if type(self._questions[self._current_question]) is ChoiceQuestion:
+            self._choice_question_ui.label_info.setText(new_label_info)
+            self._questions[self._current_question].display(self._choice_question_ui)
+        elif type(self._questions[self._current_question]) is ChoiceImageQuestion:
+            self._choice_image_question_ui.label_info.setText(new_label_info)
+            self._questions[self._current_question].display(self._choice_image_question_ui)
