@@ -1,3 +1,5 @@
+# By Dongwook Kim
+
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 

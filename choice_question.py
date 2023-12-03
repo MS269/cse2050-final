@@ -1,3 +1,5 @@
+# By Dongwook Kim
+
 from PyQt5.QtWidgets import QLayout
 
 from question import Question

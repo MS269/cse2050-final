@@ -1,3 +1,5 @@
+# By Dongwook Kim
+
 # -*- coding: utf-8 -*-
 
 # Form implementation generated from reading ui file 'choice_image_question.ui'
